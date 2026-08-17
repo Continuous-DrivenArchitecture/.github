@@ -19,11 +19,3 @@
 ### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.zh.md)
 
 以编程方式处理架构模型的语义基础。
-
-随着 CDA 生态的发展，更多项目将陆续推出。
-
-## 参与进来
-
-探索我们的项目，提交 issue，提出想法，或贡献代码。
-
-**[探索 Continuous-Driven Architecture →](https://github.com/Continuous-DrivenArchitecture)**

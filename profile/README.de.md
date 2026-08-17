@@ -19,11 +19,3 @@ Wir behandeln Architektur als strukturiertes, semantisches Wissen, das über kom
 ### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.de.md)
 
 Eine semantische Grundlage für die programmatische Arbeit mit Architekturmodellen.
-
-Weitere Projekte folgen, während sich das CDA-Ökosystem weiterentwickelt.
-
-## Mitmachen
-
-Erkunden Sie unsere Projekte, öffnen Sie ein Issue, schlagen Sie eine Idee vor oder tragen Sie Code bei.
-
-**[Continuous-Driven Architecture erkunden →](https://github.com/Continuous-DrivenArchitecture)**

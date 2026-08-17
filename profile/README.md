@@ -19,11 +19,3 @@ We treat architecture as structured, semantic knowledge that can be **validated,
 ### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.md)
 
 A semantic foundation for working programmatically with architecture models.
-
-More projects are coming as the CDA ecosystem evolves.
-
-## Get involved
-
-Explore our projects, open an issue, propose an idea, or contribute code.
-
-**[Explore Continuous-Driven Architecture →](https://github.com/Continuous-DrivenArchitecture)**
