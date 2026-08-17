@@ -12,10 +12,10 @@
 
 **Continuous-Driven Architecture (CDA)** is an open-source organization building tools and foundations to make architecture **understandable and usable by software**.
 
-We treat architecture as structured, semantic knowledge that can be **validated, transformed, connected, and continuously used across complex ecosystems**.
+We treat architecture as **structured, semantic knowledge** that can be validated, transformed, connected, and continuously used across complex ecosystems.
 
-## What we're building
+## Start here
 
-### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.md)
+### [archi-semantic-core →](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.md)
 
-A semantic foundation for working programmatically with architecture models.
+Explore the semantic foundation behind CDA in English.
