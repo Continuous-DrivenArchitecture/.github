@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { Resvg } from '@resvg/resvg-js';
 import sharp from 'sharp';
 import yaml from 'yaml';
 
@@ -14,7 +15,9 @@ const MANIFEST_PATH = path.join(BANNERS_DIR, 'manifest.json');
 export const EXPECTED_LOCALES = ['en', 'de', 'es', 'fr', 'nl', 'pt', 'zh'];
 export const CANONICAL_WIDTH = 1280;
 export const CANONICAL_HEIGHT = 320;
-const RENDER_DPI = 72;
+const TEXT_CANVAS_WIDTH = 2048;
+const TEXT_CANVAS_HEIGHT = 512;
+const TEXT_BASELINE_Y = 300;
 
 function fail(message) {
   throw new Error(message);
@@ -118,8 +121,41 @@ export async function inspectCanonical() {
   return metadata;
 }
 
-function buildMarkup(line, text) {
-  return `<span foreground="${text.color}" font-size="${text.fontSize}pt">${xmlEscape(line)}</span>`;
+export function renderTextLine(line, font, text, fontFiles) {
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${TEXT_CANVAS_WIDTH}" height="${TEXT_CANVAS_HEIGHT}">` +
+    `<text x="0" y="${TEXT_BASELINE_Y}" font-family="${font.family}" font-weight="${text.fontWeight}" font-size="${text.fontSize}" fill="${text.color}">${xmlEscape(line)}</text>` +
+    '</svg>';
+  const rendered = new Resvg(svg, {
+    font: { fontFiles, loadSystemFonts: false },
+  }).render();
+
+  const src = rendered.pixels;
+  const canvasWidth = rendered.width;
+  const canvasHeight = rendered.height;
+  let minX = canvasWidth;
+  let minY = canvasHeight;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < canvasHeight; y++) {
+    for (let x = 0; x < canvasWidth; x++) {
+      if (src[(y * canvasWidth + x) * 4 + 3] > 10) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  if (maxX < 0) fail(`line "${line}" rendered no visible ink with font ${font.family}`);
+
+  const w = maxX - minX + 1;
+  const h = maxY - minY + 1;
+  const crop = Buffer.alloc(w * h * 4);
+  for (let y = 0; y < h; y++) {
+    src.copy(crop, y * w * 4, ((minY + y) * canvasWidth + minX) * 4, ((minY + y) * canvasWidth + minX) * 4 + w * 4);
+  }
+  return { pixels: crop, width: w, height: h };
 }
 
 export async function renderLine(locale, config) {
@@ -132,49 +168,19 @@ export async function renderLine(locale, config) {
       ? base.lineHeight
       : Math.round(fontSize * (base.lineHeight / base.fontSize));
   const text = { ...base, fontSize, lineHeight };
+  const fontFiles = Object.values(config.fonts).map((f) => f.resolvedFile);
 
   const rendered = [];
   for (const line of entry.lines) {
-    const markup = buildMarkup(line, text);
-    let info;
+    let overlay;
     try {
-      info = await sharp({
-        text: {
-          text: markup,
-          font: font.family,
-          fontfile: font.resolvedFile,
-          rgba: true,
-          dpi: RENDER_DPI,
-        },
-      }).toBuffer({ resolveWithObject: true });
+      overlay = renderTextLine(line, font, text, fontFiles);
     } catch (error) {
-      fail(`languages.${locale}: failed to render line "${line}" with font ${font.family}: ${error.message}`);
+      fail(`languages.${locale}: ${error.message}`);
     }
 
-    const { data, info: rawInfo } = info;
-    let minX = rawInfo.width;
-    let minY = rawInfo.height;
-    let maxX = -1;
-    let maxY = -1;
-    for (let y = 0; y < rawInfo.height; y++) {
-      for (let x = 0; x < rawInfo.width; x++) {
-        if (data[(y * rawInfo.width + x) * 4 + 3] > 10) {
-          if (x < minX) minX = x;
-          if (x > maxX) maxX = x;
-          if (y < minY) minY = y;
-          if (y > maxY) maxY = y;
-        }
-      }
-    }
-    if (maxX < 0) fail(`languages.${locale}: line "${line}" rendered no visible ink`);
-
-    const w = maxX - minX + 1;
-    const h = maxY - minY + 1;
-    const crop = await sharp(data, {
-      raw: { width: rawInfo.width, height: rawInfo.height, channels: rawInfo.channels },
-    })
-      .extract({ left: minX, top: minY, width: w, height: h })
-      .toBuffer();
+    const w = overlay.width;
+    const h = overlay.height;
     if (w > text.maxWidth) {
       fail(`languages.${locale}: line "${line}" renders ${w}px wide, exceeding maxWidth ${text.maxWidth}px. ` +
         'Do not shrink the font automatically; adjust languages.<locale>.fontSize (or layout.text.fontSize) explicitly.');
@@ -183,7 +189,7 @@ export async function renderLine(locale, config) {
       fail(`languages.${locale}: line "${line}" renders ${h}px tall, exceeding lineHeight ${text.lineHeight}px. ` +
         'Adjust the editorial layout configuration explicitly.');
     }
-    rendered.push({ buffer: crop, width: w, height: h, text: line });
+    rendered.push({ buffer: overlay.pixels, width: w, height: h, text: line });
   }
 
   const blockHeight = text.y + (entry.lines.length - 1) * text.lineHeight + rendered[rendered.length - 1].height;

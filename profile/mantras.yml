@@ -17,7 +17,7 @@ fonts:
     file: "assets/fonts/NotoSans-Bold.ttf"
 
   cjk:
-    family: "Noto Sans SC"
+    family: "Noto Sans CJK SC"
     file: "assets/fonts/NotoSansSC-Bold.otf"
 
 languages:

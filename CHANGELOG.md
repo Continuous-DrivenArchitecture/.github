@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Bug Fixes
 
-- **banners:** keep the German line inside the safe area (de `fontSize` 50) and pin CI validation to Windows runners so regenerated pixels match the committed artifacts
+- **banners:** render text with resvg instead of the system Pango stack, making rasterization byte-deterministic across platforms (verified Windows vs Linux container); CI validation returns to `ubuntu-latest`
 
 ### Build System
 
