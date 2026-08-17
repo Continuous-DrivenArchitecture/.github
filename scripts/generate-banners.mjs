@@ -95,6 +95,7 @@ export function validateConfig(config) {
   for (const [locale, entry] of Object.entries(languages)) {
     if (!entry || typeof entry !== 'object') fail(`languages.${locale} must be an object`);
     if (!fontKeys.includes(entry.font)) fail(`languages.${locale}: unknown font key "${entry.font}"`);
+    if (entry.fontSize !== undefined) assertPositiveInteger(entry.fontSize, `languages.${locale}.fontSize`);
     if (!Array.isArray(entry.lines) || entry.lines.length === 0) fail(`languages.${locale}: "lines" must be a non-empty array`);
     entry.lines.forEach((line, index) => {
       if (typeof line !== 'string' || line.trim() === '') fail(`languages.${locale}: line ${index + 1} must be a non-empty string`);
@@ -124,7 +125,13 @@ function buildMarkup(line, text) {
 export async function renderLine(locale, config) {
   const entry = config.languages[locale];
   const font = config.fonts[entry.font];
-  const text = config.layout.text;
+  const base = config.layout.text;
+  const fontSize = entry.fontSize ?? base.fontSize;
+  const lineHeight =
+    entry.fontSize === undefined
+      ? base.lineHeight
+      : Math.round(fontSize * (base.lineHeight / base.fontSize));
+  const text = { ...base, fontSize, lineHeight };
 
   const rendered = [];
   for (const line of entry.lines) {
@@ -145,28 +152,38 @@ export async function renderLine(locale, config) {
     }
 
     const { data, info: rawInfo } = info;
-    let trimmed;
-    try {
-      trimmed = await sharp(data, {
-        raw: { width: rawInfo.width, height: rawInfo.height, channels: rawInfo.channels },
-      })
-        .trim({ threshold: 10 })
-        .toBuffer({ resolveWithObject: true });
-    } catch (error) {
-      fail(`languages.${locale}: failed to measure line "${line}": ${error.message}`);
+    let minX = rawInfo.width;
+    let minY = rawInfo.height;
+    let maxX = -1;
+    let maxY = -1;
+    for (let y = 0; y < rawInfo.height; y++) {
+      for (let x = 0; x < rawInfo.width; x++) {
+        if (data[(y * rawInfo.width + x) * 4 + 3] > 10) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
     }
+    if (maxX < 0) fail(`languages.${locale}: line "${line}" rendered no visible ink`);
 
-    const w = trimmed.info.width;
-    const h = trimmed.info.height;
+    const w = maxX - minX + 1;
+    const h = maxY - minY + 1;
+    const crop = await sharp(data, {
+      raw: { width: rawInfo.width, height: rawInfo.height, channels: rawInfo.channels },
+    })
+      .extract({ left: minX, top: minY, width: w, height: h })
+      .toBuffer();
     if (w > text.maxWidth) {
       fail(`languages.${locale}: line "${line}" renders ${w}px wide, exceeding maxWidth ${text.maxWidth}px. ` +
-        'Do not shrink the font automatically; adjust the editorial layout configuration explicitly.');
+        'Do not shrink the font automatically; adjust languages.<locale>.fontSize (or layout.text.fontSize) explicitly.');
     }
     if (h > text.lineHeight) {
       fail(`languages.${locale}: line "${line}" renders ${h}px tall, exceeding lineHeight ${text.lineHeight}px. ` +
         'Adjust the editorial layout configuration explicitly.');
     }
-    rendered.push({ buffer: trimmed.data, width: w, height: h, text: line });
+    rendered.push({ buffer: crop, width: w, height: h, text: line });
   }
 
   const blockHeight = text.y + (entry.lines.length - 1) * text.lineHeight + rendered[rendered.length - 1].height;

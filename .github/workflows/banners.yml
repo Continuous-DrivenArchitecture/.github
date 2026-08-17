@@ -2,7 +2,7 @@ name: banners
 
 on:
   push:
-    branches: [main]
+    branches: [develop, main]
     paths:
       - 'profile/mantras.yml'
       - 'profile/images/source/**'

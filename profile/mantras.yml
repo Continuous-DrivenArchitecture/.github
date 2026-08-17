@@ -23,48 +23,61 @@ fonts:
 languages:
   en:
     font: latin
+    fontSize: 54
     lines:
-      - "Architecture that software"
-      - "can understand."
+      - "Architecture that"
+      - "software can"
+      - "understand."
     alt: "Architecture that software can understand."
 
   de:
     font: latin
+    fontSize: 52
     lines:
-      - "Architektur, die Software"
-      - "verstehen kann."
+      - "Architektur, die"
+      - "Software verstehen"
+      - "kann."
     alt: "Architektur, die Software verstehen kann."
 
   es:
     font: latin
+    fontSize: 48
     lines:
-      - "Arquitectura que el software"
-      - "puede entender."
+      - "Arquitectura que"
+      - "el software puede"
+      - "entender."
     alt: "Arquitectura que el software puede entender."
 
   fr:
     font: latin
+    fontSize: 44
     lines:
-      - "Une architecture que le logiciel"
+      - "Une architecture"
+      - "que le logiciel"
       - "peut comprendre."
     alt: "Une architecture que le logiciel peut comprendre."
 
   nl:
     font: latin
+    fontSize: 50
     lines:
-      - "Architectuur die software"
-      - "kan begrijpen."
+      - "Architectuur die"
+      - "software kan"
+      - "begrijpen."
     alt: "Architectuur die software kan begrijpen."
 
   pt:
     font: latin
+    fontSize: 46
     lines:
-      - "Arquitetura que o software"
-      - "pode compreender."
+      - "Arquitetura que"
+      - "o software pode"
+      - "compreender."
     alt: "Arquitetura que o software pode compreender."
 
   zh:
     font: cjk
+    fontSize: 54
     lines:
       - "软件能够理解的"
       - "架构。"
