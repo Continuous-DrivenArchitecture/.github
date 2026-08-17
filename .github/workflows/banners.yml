@@ -1,0 +1,44 @@
+name: banners
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'profile/mantras.yml'
+      - 'profile/images/source/**'
+      - 'assets/fonts/**'
+      - 'scripts/generate-banners.mjs'
+      - 'scripts/check-banners.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'profile/README*.md'
+  pull_request:
+    paths:
+      - 'profile/mantras.yml'
+      - 'profile/images/source/**'
+      - 'assets/fonts/**'
+      - 'scripts/generate-banners.mjs'
+      - 'scripts/check-banners.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'profile/README*.md'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate generated banners
+        run: npm run check:banners

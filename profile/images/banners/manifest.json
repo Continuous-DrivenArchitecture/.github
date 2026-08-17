@@ -1,0 +1,28 @@
+{
+  "source": "cda-enterprise-ecosystem-banner.png",
+  "width": 1280,
+  "height": 320,
+  "locales": {
+    "en": {
+      "file": "cda-enterprise-ecosystem-banner.en.png"
+    },
+    "de": {
+      "file": "cda-enterprise-ecosystem-banner.de.png"
+    },
+    "es": {
+      "file": "cda-enterprise-ecosystem-banner.es.png"
+    },
+    "fr": {
+      "file": "cda-enterprise-ecosystem-banner.fr.png"
+    },
+    "nl": {
+      "file": "cda-enterprise-ecosystem-banner.nl.png"
+    },
+    "pt": {
+      "file": "cda-enterprise-ecosystem-banner.pt.png"
+    },
+    "zh": {
+      "file": "cda-enterprise-ecosystem-banner.zh.png"
+    }
+  }
+}

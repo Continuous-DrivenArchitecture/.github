@@ -1,0 +1,21 @@
+{
+  "name": "cda-org-profile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Continuous-Driven Architecture organization profile: deterministic multilingual banner generation.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "generate:banners": "node scripts/generate-banners.mjs",
+    "check:banners": "node scripts/check-banners.mjs"
+  },
+  "devDependencies": {
+    "sharp": "0.34.2",
+    "yaml": "2.7.1"
+  },
+  "allowScripts": {
+    "sharp@0.34.2": true
+  }
+}

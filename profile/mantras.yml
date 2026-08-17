@@ -1,0 +1,71 @@
+layout:
+  width: 1280
+  height: 320
+
+  text:
+    x: 72
+    y: 90
+    fontSize: 34
+    lineHeight: 42
+    fontWeight: 700
+    color: "#1f2937"
+    maxWidth: 500
+
+fonts:
+  latin:
+    family: "Noto Sans"
+    file: "assets/fonts/NotoSans-Bold.ttf"
+
+  cjk:
+    family: "Noto Sans SC"
+    file: "assets/fonts/NotoSansSC-Bold.otf"
+
+languages:
+  en:
+    font: latin
+    lines:
+      - "Architecture that software"
+      - "can understand."
+    alt: "Architecture that software can understand."
+
+  de:
+    font: latin
+    lines:
+      - "Architektur, die Software"
+      - "verstehen kann."
+    alt: "Architektur, die Software verstehen kann."
+
+  es:
+    font: latin
+    lines:
+      - "Arquitectura que el software"
+      - "puede entender."
+    alt: "Arquitectura que el software puede entender."
+
+  fr:
+    font: latin
+    lines:
+      - "Une architecture que le logiciel"
+      - "peut comprendre."
+    alt: "Une architecture que le logiciel peut comprendre."
+
+  nl:
+    font: latin
+    lines:
+      - "Architectuur die software"
+      - "kan begrijpen."
+    alt: "Architectuur die software kan begrijpen."
+
+  pt:
+    font: latin
+    lines:
+      - "Arquitetura que o software"
+      - "pode compreender."
+    alt: "Arquitetura que o software pode compreender."
+
+  zh:
+    font: cjk
+    lines:
+      - "软件能够理解的"
+      - "架构。"
+    alt: "软件能够理解的架构。"
