@@ -16,7 +16,7 @@ Wir behandeln Architektur als strukturiertes, semantisches Wissen, das über kom
 
 ## Was wir bauen
 
-### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.de.md)
 
 Eine semantische Grundlage für die programmatische Arbeit mit Architekturmodellen.
 

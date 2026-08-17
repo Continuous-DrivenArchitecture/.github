@@ -16,7 +16,7 @@ We treat architecture as structured, semantic knowledge that can be **validated,
 
 ## What we're building
 
-### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.md)
 
 A semantic foundation for working programmatically with architecture models.
 

@@ -16,7 +16,7 @@
 
 ## 我们在构建什么
 
-### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.zh.md)
 
 以编程方式处理架构模型的语义基础。
 
