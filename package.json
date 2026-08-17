@@ -9,10 +9,17 @@
   },
   "scripts": {
     "generate:banners": "node scripts/generate-banners.mjs",
-    "check:banners": "node scripts/check-banners.mjs"
+    "check:banners": "node scripts/check-banners.mjs",
+    "test": "vitest run"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "7.0.0",
+    "@semantic-release/git": "11.0.1",
+    "@semantic-release/github": "12.0.9",
+    "conventional-changelog-conventionalcommits": "9.3.1",
+    "semantic-release": "25.0.9",
     "sharp": "0.34.2",
+    "vitest": "4.1.10",
     "yaml": "2.7.1"
   },
   "allowScripts": {

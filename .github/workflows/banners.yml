@@ -1,4 +1,4 @@
-name: banners
+name: validate
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
       - 'profile/mantras.yml'
       - 'profile/images/source/**'
       - 'assets/fonts/**'
-      - 'scripts/generate-banners.mjs'
-      - 'scripts/check-banners.mjs'
+      - 'scripts/**'
+      - 'test/**'
       - 'package.json'
       - 'package-lock.json'
       - 'profile/README*.md'
@@ -17,15 +17,15 @@ on:
       - 'profile/mantras.yml'
       - 'profile/images/source/**'
       - 'assets/fonts/**'
-      - 'scripts/generate-banners.mjs'
-      - 'scripts/check-banners.mjs'
+      - 'scripts/**'
+      - 'test/**'
       - 'package.json'
       - 'package-lock.json'
       - 'profile/README*.md'
   workflow_dispatch:
 
 jobs:
-  check:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -39,6 +39,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run tests
+        run: npm test
 
       - name: Validate generated banners
         run: npm run check:banners

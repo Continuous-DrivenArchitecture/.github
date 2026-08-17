@@ -17,3 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 
 - **profile:** each README now links to the matching localized `archi-semantic-core` readme ([ca799de](https://github.com/Continuous-DrivenArchitecture/.github/commit/ca799de814e02a319f9acb2cb35e7ed596c107e3))
+
+### Tests
+
+- add vitest suite covering configuration validation, per-locale typography, manifest and banner generation
+
+### Build System
+
+- add semantic-release configuration and release workflow for `main`
