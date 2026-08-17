@@ -10,9 +10,9 @@
 
 ## Continuous-Driven Architecture
 
-**Continuous-Driven Architecture (CDA)** est une organisation open source qui construit des outils et des fondations pour rendre l'architecture **compréhensible et utilisable par les logiciels**.
+Nous sommes une organisation open source qui construit des outils et des fondations pour rendre l'architecture compréhensible et utilisable par les logiciels.
 
-Nous traitons l'architecture comme une **connaissance structurée et sémantique** qui peut être validée, transformée, connectée et utilisée en continu à travers des écosystèmes complexes.
+Nous concevons l'architecture comme une connaissance structurée et sémantique que les logiciels peuvent valider, transformer, connecter et utiliser en continu à travers des écosystèmes complexes.
 
 ## Commencez ici
 
