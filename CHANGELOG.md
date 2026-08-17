@@ -22,6 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - add vitest suite covering configuration validation, per-locale typography, manifest and banner generation
 
+### Bug Fixes
+
+- **banners:** keep the German line inside the safe area (de `fontSize` 50) and pin CI validation to Windows runners so regenerated pixels match the committed artifacts
+
 ### Build System
 
 - add semantic-release configuration and release workflow for `main`
+
+### Continuous Integration
+
+- run validation and release workflows on Node 24 to satisfy the semantic-release toolchain

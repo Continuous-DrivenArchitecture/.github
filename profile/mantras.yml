@@ -32,7 +32,7 @@ languages:
 
   de:
     font: latin
-    fontSize: 52
+    fontSize: 50
     lines:
       - "Architektur, die"
       - "Software verstehen"

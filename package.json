@@ -5,7 +5,7 @@
   "description": "Continuous-Driven Architecture organization profile: deterministic multilingual banner generation.",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=24.15"
   },
   "scripts": {
     "generate:banners": "node scripts/generate-banners.mjs",
