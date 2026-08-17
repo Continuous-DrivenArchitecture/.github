@@ -16,6 +16,6 @@ We treat architecture as **structured, semantic knowledge** that can be validate
 
 ## Start here
 
-### [archi-semantic-core →](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.md)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.md)
 
 Explore the semantic foundation behind CDA in English.

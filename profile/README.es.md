@@ -16,6 +16,6 @@ Tratamos la arquitectura como **conocimiento estructurado y semántico** que pue
 
 ## Empieza aquí
 
-### [archi-semantic-core →](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.es.md)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.es.md)
 
 Explora en español la base semántica sobre la que se construye CDA.

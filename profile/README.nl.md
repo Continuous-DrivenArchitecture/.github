@@ -16,6 +16,6 @@ Wij behandelen architectuur als **gestructureerde, semantische kennis** die binn
 
 ## Begin hier
 
-### [archi-semantic-core →](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.nl.md)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.nl.md)
 
 Verken in het Nederlands het semantische fundament achter CDA.

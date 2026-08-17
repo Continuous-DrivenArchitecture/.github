@@ -16,6 +16,6 @@
 
 ## 从这里开始
 
-### [archi-semantic-core →](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.zh.md)
+### [archi-semantic-core](https://github.com/Continuous-DrivenArchitecture/archi-semantic-core/blob/main/README.zh.md)
 
 用中文探索 CDA 背后的语义基础。
